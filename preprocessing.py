@@ -8,20 +8,22 @@ import codecs
 # Chinese jieba : https://github.com/fxsjy/jieba
 # English nltk : https://www.nltk.org/data.html
 
-
 # Think about the order of these steps
 # Do they needed in checking the similarity?
 
-#### Before Tokenization
 # Punctuation removal ?
 # Stop Word removal ?
 # Rare words removal ?
 # File "stop_words.txt", Do we need it???
 
-
-#### After Tokenization
 # Stemming ?
 # Lemmatization ?
+
+
+
+####
+## define stopwords.txt by us or use pre-defined online ???
+
 
 import utils
 import re
@@ -64,13 +66,14 @@ def preprocessing_chinese(corpus):
 
     tokenized_corpus_processed =[]
     for sentence in corpus:
-        # punctuation remove
+        # Slice the sentences to token
         tokenized_sentence = jieba.cut(sentence)
         stopwords_ch = utils.readFile('/stopwords_ch.txt')[0].split(",")
         punctuation_ch = utils.readFile('/punctuation.txt')
-        tokenized_sentence_processed=[]
 
+        tokenized_sentence_processed=[]
         for token in tokenized_sentence:
+            # Remove token of space
             token = token.replace(' ', '')
             if token not in stopwords_ch and token not in punctuation_ch and token:
                 # Fine processing for english in Chinese
@@ -83,9 +86,6 @@ def preprocessing_chinese(corpus):
 
     for i in tokenized_corpus_processed:
         print(i)
-
-
-
 
 
 
@@ -121,12 +121,14 @@ if __name__ == "__main__":
 
 
 
-
 ##### Embedding #####
 
 ### For both Chinese and English
 # Chinese ??   https://github.com/Embedding/Chinese-Word-Vectors
 # English ??
+# How many word embedding do we need ???
+
+
 
 
 ##### Transform #####
@@ -134,8 +136,14 @@ if __name__ == "__main__":
 ### For both Chinese and English
 # https://openai.com/blog/language-unsupervised/
 # https://s3-us-west-2.amazonaws.com/openai-assets/research-covers/language-unsupervised/language_understanding_paper.pdf
+#
+# How to implement, Online code examples
+# Bert with transformer pytorch
+# https://pypi.org/project/pytorch-pretrained-bert/
 
-# How to implement, Online code examples ??
 
 
-### Linear classification ####
+
+
+
+##### Linear classification #####
