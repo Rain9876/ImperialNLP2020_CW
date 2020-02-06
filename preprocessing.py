@@ -27,7 +27,6 @@ import codecs
 
 import utils
 import re
-from bpemb import BPEmb
 from nltk.corpus import stopwords
 from nltk.stem import PorterStemmer
 from nltk.stem import WordNetLemmatizer
@@ -95,9 +94,6 @@ if __name__ == "__main__":
 
     nltk.download('stopwords')
 
-    bpemb_en = BPEmb(lang="en", dim=50, vs=200000)
-    bpemb_zh = BPEmb(lang="zh", vs=200000)
-
     Chinese = utils.readFile("/en-zh/train.enzh.mt")
     English = utils.readFile("/en-zh/train.enzh.src")
 
@@ -107,11 +103,6 @@ if __name__ == "__main__":
     for i in range(len(corpus_ch)):
         en_p = preprocessing_english([corpus_en[i]])
         ch_p = preprocessing_chinese([corpus_ch[i]])
-    print("=="*30)
-
-    for i in range(len(corpus_ch)):
-        print(bpemb_en.encode(corpus_en[i]))
-        print(bpemb_zh.encode(corpus_ch[i]))
     print("=="*30)
 
 
